@@ -1,0 +1,100 @@
+#%RAML 1.0
+title: Users API
+version: 1.0
+
+/users:
+  displayName: Users
+  get:
+    description: Search for users based on given filters
+    queryParameters:
+      firstname:
+        type: string
+        required: false
+        description: use to query all users by a given firstname
+      lastname:
+        type: string
+        required: false
+        description: use to query all users by a given lastname
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "UserId": 1,
+                  "LastName": "Ross",
+                  "FirstName": "Stuart",
+                  "Address": "78 theydon road, London UK",
+                  "Email": "ross.stuart@mail.com"
+                },
+                {
+                  "UserId": 2,
+                  "LastName": "Kim",
+                  "FirstName": "Rob",
+                  "Address": "78 london road, London UK",
+                  "Email": "kim.rob@mail.com"
+                }
+              ]
+  post:
+    description: used to create an user
+    body:
+      application/json:
+        example: |
+         {
+            "LastName": "Ross",
+            "FirstName": "Stuart",
+            "Address": "78 theydon road, London UK",
+            "Email": "ross.stuart@mail.com"
+          }
+    responses:
+      201:
+  /import-file:
+    post:
+      description: import a CSV file
+      responses:
+        200:
+    
+  /{userId}:
+    get:
+      description: Get the user by UserId key
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "UserId": 1,
+                  "LastName": "Ross",
+                  "FirstName": "Stuart",
+                  "Address": "78 theydon road, London UK",
+                  "Email": "ross.stuart@mail.com"
+                }
+    patch:
+      description: Patch the user by UserId key
+      body:
+        application/json:
+          example: |
+           {
+              "Email": "ross.stuart.new@mail.com"
+            }
+      responses:
+        200:
+    put:
+      description: Patch the user by UserId key
+      body:
+        application/json:
+          example: |
+           {
+              "LastName": "Ross",
+              "FirstName": "Stuart",
+              "Address": "78 theydon road, London UK",
+              "Email": "ross.stuart@mail.com"
+            }
+      responses:
+        200:
+    delete:
+      description: delete the user by UserId key
+      responses:
+        200:
+  
